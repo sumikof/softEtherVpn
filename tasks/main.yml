@@ -9,11 +9,12 @@
     - openssl
     - readline
     - ncurses
+    - which
     #- pthread
     #
 - name: put tar.gz
-  unarchive: >
-    src="softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz"
+  get_url: >
+    url: "http://jp.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz"
     dest="/tmp"
 
 - name: make all
