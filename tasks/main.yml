@@ -1,0 +1,42 @@
+---
+- name: yum install
+  yum: name={{ item }} state=present
+  with_items:
+    - gcc
+    - binutils
+    - glibc
+    - zlib
+    - openssl
+    - readline
+    - ncurses
+    #- pthread
+    #
+- name: put tar.gz
+  unarchive: >
+    src="softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz"
+    dest="/tmp"
+
+- name: make all
+  expect:
+    command: "make"
+    chdir: "/tmp/vpnserver"
+    responses:
+      'Please choose one of above number:' : "1"
+      'Please choose one of above number:' : "1"
+      'Please choose one of above number:' : "1"
+
+#- name: copy /tmp/vpnserver /usr/local/vpnserver
+#- name: export PATH="/usr/local/vpnserver":$PATH
+- name: 
+  copy: >
+    src=vpnserver.service
+    dest=/etc/systemd/system
+
+- name: 
+  template: >
+    src=setup.sh
+    dest=/tmp
+    mode=777
+
+- name: start vpnserver
+  service: name=vpnserver enabled=yes state=restarted
