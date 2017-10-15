@@ -6,6 +6,7 @@ export HUBPASS={{ HUBPASS }}
 export USERNAME={{ USERNAME }}
 export USERPASS={{ USERPASS }}
 export SHAREDKEY={{ SHAREDKEY }}
+export PATH=/usr/local/vpnserver:$PATH
 
 # 仮想HUB作成
 vpncmd localhost /SERVER /CMD HubCreate $HUBNAME \
