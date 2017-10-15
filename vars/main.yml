@@ -1,6 +1,6 @@
 ---
-HUBNAME=testhub
-HUBPASS=password
-USERNAME=user
-USERPASS=password
-SHAREDKEY=sharedkey
+HUBNAME: testhub
+HUBPASS: password
+USERNAME: user
+USERPASS: password
+SHAREDKEY: sharedkey

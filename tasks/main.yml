@@ -13,21 +13,19 @@
     #- pthread
     #
 - name: put tar.gz
-  get_url: >
-    url: "http://jp.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz"
-    dest="/tmp"
+  unarchive:
+    src: "http://jp.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz"
+    dest: /usr/local/
+    copy: no
 
-- name: make all
+- name: make
   expect:
     command: "make"
-    chdir: "/tmp/vpnserver"
+    chdir: "/usr/local/vpnserver"
     responses:
       'Please choose one of above number:' : "1"
-      'Please choose one of above number:' : "1"
-      'Please choose one of above number:' : "1"
 
-#- name: copy /tmp/vpnserver /usr/local/vpnserver
-#- name: export PATH="/usr/local/vpnserver":$PATH
+
 - name: 
   copy: >
     src=vpnserver.service
@@ -39,5 +37,6 @@
     dest=/tmp
     mode=777
 
-- name: start vpnserver
-  service: name=vpnserver enabled=yes state=restarted
+#- name: export PATH="/usr/local/vpnserver":$PATH
+#- name: start vpnserver
+  #service: name=vpnserver enabled=yes state=restarted
