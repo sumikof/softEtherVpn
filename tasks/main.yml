@@ -18,6 +18,17 @@
     dest: /usr/local/
     copy: no
 
+- name: get pip
+  get_url: 
+    url: https://bootstrap.pypa.io/get-pip.py
+    dest: /tmp/get-pip.py
+
+- name: install pip
+  command: python /tmp/get-pip.py
+
+- name:
+  pip: name=pexpect
+
 - name: make
   expect:
     command: "make"
